@@ -29,14 +29,14 @@ class geoip (
   }
 
   # fetch and manage GeoIP.dat
-  exec { 'fetch_geoip':
-    command => '/bin/touch /usr/share/GeoIP/GeoIP.dat && /usr/bin/perl /usr/share/doc/GeoIP-*/fetch-geoipdata.pl > /dev/null 2>&1',
-    unless  => '/usr/bin/test -s /usr/share/GeoIP/GeoIP.dat',
-    require => File['/usr/share/GeoIP'],
-  }
-  file { '/usr/share/GeoIP/GeoIP.dat':
-    require => Exec['fetch_geoip'],
-  }
+  #  exec { 'fetch_geoip':
+  #  command => '/bin/touch /usr/share/GeoIP/GeoIP.dat && /usr/bin/perl /usr/share/doc/GeoIP-*/fetch-geoipdata.pl > /dev/null 2>&1',
+  #  unless  => '/usr/bin/test -s /usr/share/GeoIP/GeoIP.dat',
+  #  require => File['/usr/share/GeoIP'],
+  #}
+  #file { '/usr/share/GeoIP/GeoIP.dat':
+  #  require => Exec['fetch_geoip'],
+  #}
 
   # fetch and manage GeoLiteCity.dat
   exec { 'fetch_geolitecity':
@@ -55,8 +55,8 @@ class geoip (
   }
 
   # files are fetched via cron every month
-  file { '/etc/cron.monthly/fetch-geodata':
-    mode    => '0755',
-    content => template('geoip/fetch-geodata.erb'),
-  }
+  #file { '/etc/cron.monthly/fetch-geodata':
+  #  mode    => '0755',
+  #  content => template('geoip/fetch-geodata.erb'),
+  #}
 }
